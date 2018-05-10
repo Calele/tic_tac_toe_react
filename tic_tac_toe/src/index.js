@@ -10,6 +10,17 @@ function Square(props) {
   );
 }
 
+function StepButton(props) {
+  return (
+    <button
+      onClick={props.onClick}
+      className={props.isActive ? 'bold' : ''}
+    >
+      {props.value}
+    </button>
+  );
+}
+
 class Board extends React.Component {
   renderSquare(i) {
     return (
@@ -94,7 +105,7 @@ class Game extends React.Component {
         'Go to game start';
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <StepButton isActive={this.state.stepNumber === move} onClick={() => this.jumpTo(move)} value={desc} />
         </li>
       );
     });
@@ -128,6 +139,7 @@ class Game extends React.Component {
 ReactDOM.render(<Game />, document.getElementById("root"));
 
 function calculateWinner(squares) {
+console.log(squares);
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
